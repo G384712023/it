@@ -1,0 +1,36 @@
+TaskRepository.javaは、Spring Data JPA を使用して、
+タスク (Task) エンティティに対するデータベース操作を簡単に行うためのクラスです。
+
+この TaskRepository インターフェースを通じて、タスクエンティティに対する様々なデータベース操作が簡単に実装でき、
+カスタムクエリメソッドを追加することで、特定の条件に基づく検索も行えるようになります。
+
+プログラムの説明：
+
+・import org.springframework.data.jpa.repository.JpaRepository;
+    JpaRepository インターフェースを利用するためのインポートです。
+    これにより、標準的な CRUD 操作を含む多数の便利なメソッドが利用可能になります。
+    ※CRUD操作とは・・・CRUD操作とはデータを操作する際の種別で、Create（作成）、Read（参照）、Update（更新）、及びDelete（削除）です。
+
+・import java.time.LocalDate;
+    LocalDate クラスを利用するためのインポートです。タスクの期限日を扱うために使用します。
+    LocalDate は日付のみ（年、月、日）を表現します。
+
+・import java.util.List;
+    List インターフェースを利用するためのインポートです。複数の Task オブジェクトをリスト形式で扱うために使用されます。
+
+・public interface TaskRepository extends JpaRepository<Task, Long> {
+    このインターフェースは JpaRepository インターフェースを拡張しています。
+    JpaRepository は、データベース操作の基本的な CRUD（作成、読み取り、更新、削除）操作を含む
+    多くの便利なメソッドを提供します。
+    ここで指定しているのは、Task エンティティと、その主キーの型が Long であるという情報です。
+
+・カスタムクエリメソッド: findByPriority
+    このメソッドは、タスクの優先度 (priority) に基づいてタスクを検索します。
+    findBy の後にフィールド名を付けることで、自動的に SQL クエリが生成されます。
+    この場合、指定された優先度と一致するタスクのリストが返されます。
+
+・カスタムクエリメソッド: findByDueDateBefore
+    このメソッドは、指定された日付 (date) よりも前に期限が来るタスクを検索します。
+    findByDueDateBefore という名前から、自動的に「期限日が指定された日付より前」のタスクを検索する
+    SQL クエリが生成されます。
+    このメソッドは、期限が近い、または過ぎたタスクを取得するのに役立ちます。

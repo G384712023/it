@@ -1,0 +1,50 @@
+TaskService.javaは、Spring Boot でのタスク管理アプリケーションにおいて
+ビジネスロジックを担当するサービスクラスである.
+データベースとのやり取りを直接行う TaskRepository を利用して、
+タスクの取得、保存、削除といった基本的な操作を行うビジネスロジックを提供している。
+
+
+プログラムの説明：
+
+・import org.springframework.beans.factory.annotation.Autowired;
+    @Autowired アノテーションを利用するためのインポートです。
+    これは、Spring の依存性注入機能を使用して、Spring コンテナが管理する 
+    TaskRepository を TaskService に自動的に注入します。
+
+・import org.springframework.stereotype.Service;
+    @Service アノテーションを利用するためのインポートです。
+    このアノテーションは、TaskService クラスがビジネスロジックを持つサービスクラスであることを示します。
+
+・import java.util.List;
+    List インターフェースを利用するためのインポートです。複数の Task オブジェクトをリスト形式で扱うために使用されます。
+
+・import java.util.Optional;
+    Optional クラスを利用するためのインポートです。このクラスは、存在しないかもしれない値を表現するために使用され、
+    getTaskById メソッドで使用されます。
+
+・@Service
+    このアノテーションは、クラスがサービスレイヤーとして機能することを示す。
+    @Service が付与されたクラスは、Spring が自動的に管理し、他のクラスで依存注入（DI）を利用して
+    インスタンス化することができます。
+
+・@Autowired
+    @Autowired アノテーションは、Spring によって依存関係が自動的に注入されることを示す。
+    ここでは、TaskRepository がこのクラスに注入されている。TaskRepository はデータベースとの
+    やり取りを行うためのリポジトリである。
+
+・getAllTasksメソッド
+    このメソッドは、データベースから全てのタスクを取得し、それらをリスト (List<Task>) 形式で返す。
+    taskRepository.findAll() を使用して、TaskRepository から全てのレコードを取得している。
+
+・getTaskByIdメソッド
+    このメソッドは、指定された id に対応するタスクをデータベースから取得する。返り値は Optional<Task> 型で、
+    指定された id に対応するタスクが存在しない場合に備えている。
+    Optional は、結果が存在するかどうかを安全に扱うためのクラスである。
+
+・saveTaskメソッド
+    このメソッドは、与えられた task をデータベースに保存する。taskRepository.save(task) は、
+    既存のレコードを更新するか、新しいレコードを追加する役割を果す。返り値は保存された Task オブジェクトである。
+
+・deleteTaskメソッド
+    このメソッドは、指定された id に対応するタスクをデータベースから削除する。
+    taskRepository.deleteById(id) を使用して、該当するタスクを削除する。

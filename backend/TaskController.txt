@@ -1,0 +1,59 @@
+TaskController.javaはSpring Bootアプリケーションにおいて、HTTPリクエストを受け取り、TaskServiceを
+利用してビジネスロジックを実行し、レスポンスを返す役割を持っている.
+
+
+プログラムの説明：
+
+・import org.springframework.beans.factory.annotation.Autowired;
+    @Autowired アノテーションを利用するためのインポートです。
+    これは、Spring の依存性注入機能を使用して、Spring コンテナが管理する 
+    TaskRepository を TaskService に自動的に注入します。
+
+・import org.springframework.web.bind.annotation.*;
+    Spring MVC の各種アノテーション（@RestController、@RequestMapping、@GetMapping、@PostMapping、@PutMapping、@DeleteMapping）
+    を利用するためのインポートです。これにより、HTTP リクエストとメソッドを関連付けることができます。
+
+・import java.util.List;
+    List インターフェースを利用するためのインポートです。複数の Task オブジェクトをリスト形式で扱うために使用されます。
+
+・import java.util.Optional;
+    Optional クラスを利用するためのインポートです。このクラスは、存在しないかもしれない値を表現するために使用され、
+    getTaskById メソッドで使用されます。
+
+・＠RestController
+    ＠RestControllerアノテーションは、このクラスがRESTful Webサービスのコントローラーとして
+    機能することを示す.このクラスの各メソッドは、HTTPリクエストを処理して、その結果を
+    HTTPレスポンスとして返す.
+
+・＠RequestMapping("/api/tasks")
+    このアノテーションは、このコントローラーが/api/tasksのURLパスにマッピングされることを示す.
+    クラス全体に適用されているため、このコントローラー内の各メソッドは/api/tasksをベースにした
+    エンドポイントに対応する.
+
+・＠Autowired
+    @Autowired アノテーションは、TaskService がこのコントローラーに自動的に注入されることを示す.
+    これにより、TaskService のメソッドをこのクラス内で利用できるようになる.
+
+・getAllTasksメソッド
+    このメソッドは、GET /api/tasks リクエストを処理する.TaskService を呼び出して全てのタスクを取得し、
+    それを JSON フォーマットでクライアントに返す.
+
+・getTaskByIdメソッド
+    このメソッドは、GET /api/tasks/{id} リクエストを処理する.URLパスからidを取得し、
+    そのidに対応するタスクを TaskService から取得して返す.Optional<Task> 型で返すことで、
+    タスクが存在しない場合も考慮する.
+
+・createTaskメソッド
+    このメソッドは、POST /api/tasks リクエストを処理する.リクエストボディに含まれる 
+    Task オブジェクトを受け取り、それを TaskService に渡してデータベースに保存する.
+    保存されたタスクが JSON フォーマットでクライアントに返す.
+
+・updateTaskメソッド
+    このメソッドは、PUT /api/tasks/{id} リクエストを処理する.URL パスから id を取得し、
+    リクエストボディに含まれる updatedTask のデータで既存のタスクを更新する.
+    タスクが存在しない場合は、updatedTask を新規作成して保存する.
+
+・deleteTaskメソッド
+    このメソッドは、DELETE /api/tasks/{id} リクエストを処理する.URL パスから取得した
+    id に対応するタスクを削除する.戻り値はなし(void を返す).
+

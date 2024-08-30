@@ -1,0 +1,35 @@
+application.properitiesは、Spring Boot アプリケーションの設定項目です。
+これらの設定は、Spring Boot アプリケーションがどのようにデータベースに接続し、
+データベースのスキーマを管理し、アプリケーションのリクエストを処理するかをコントロールします。
+
+
+プログラムの説明：
+
+・spring.datasource.url=jdbc:mysql://localhost:3306/taskmanager
+    この設定は、Spring Boot アプリケーションが接続するデータベースのURLを指定します。
+    jdbc:mysql://localhost:3306/taskmanager は、ローカルホストのMySQLデータベースの 
+    taskmanager というデータベース名に接続するためのURLです。
+    localhost はデータベースが動作しているマシンを指し、3306 はMySQLのデフォルトポートです。
+
+・spring.datasource.username=root
+    この設定は、データベースに接続するためのユーザー名を指定します。
+    ここでは、デフォルトのMySQLユーザーである root を使用しています。
+
+・spring.datasource.password=password
+    この設定は、データベースに接続するためのパスワードを指定します。
+    ここでは、password という文字列をパスワードとして設定しています。
+    実際の環境では、より強力でセキュアなパスワードを使用することが推奨されます。
+
+・spring.jpa.hibernate.ddl-auto=update
+    この設定は、Hibernate（JPA の実装の一つ）がアプリケーションのエンティティとデータベーススキーマの同期方法を指定します。
+    update に設定すると、アプリケーション起動時にエンティティに基づいてデータベーススキーマを自動的に更新します。
+    テーブルやカラムの追加などを自動的に行いますが、既存のデータには影響を与えません。
+
+・spring.jpa.show-sql=true
+    この設定は、Hibernate が実行するSQLクエリをコンソールに表示するかどうかを指定します。
+    true に設定すると、実行されたSQLクエリがログに表示され、デバッグや開発中に役立ちます。
+
+・spring.mvc.pathmatch.matching-strategy=ant_path_matcher
+    この設定は、Spring MVC がリクエストパスをマッチングする際の戦略を指定します。
+    ant_path_matcher は、* や ? などのワイルドカードをサポートするAntスタイルのパスパターンを使用します。
+    これにより、より柔軟なルーティングが可能になります。

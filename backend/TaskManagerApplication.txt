@@ -1,0 +1,32 @@
+TaskManagerApplication.javaはアプリケーションを起動し、Spring Bootが提供する機能を利用可能にできる.
+例：依存性の注入、Webサーバーの起動、REST APIの設定など
+
+
+プログラムの説明：
+
+・package com.example.taskmanager;
+    クラスが属するパッケージを指定。Javaでのクラスの組織化に使用
+
+・import org.springframework.boot.SpringApplication;
+・import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+    SpringBootの機能を利用するために必要なクラスをインポート
+
+・public static void main(String[] args) メソッド
+    このメソッドが実行されることで、Spring Bootが起動し、内蔵のWebサーバが立ち上がる(通常はTomcat)
+
+・SpringApplication.run(TaskManagerApplication.class, args);
+    Spring Bootアプリを実際に起動。このメソッドが呼ばれると、Spring Bootは全ての構成要素を初期化し、
+    アプリケーションを起動
+
+
+役割：
+アプリケーションの起動：TaskManagerApplication.javaはアプリケーションを起動する役割を持つ.
+                    Spring Bootアプリケーションでは、このクラスがなければアプリケーションを
+                    スタートすることができない.
+設定の中心：＠SpringBootApplicationアノテーションが付与されたクラスは、アプリケーション全体の設定や
+          コンポーネントスキャンの起点となる.
+エントリーポイントの提供：mainメソッドは、通常のJavaアプリケーションのエントリーポイントであり、
+                     Spring Bootアプリケーションのエントリーポイントとしても機能する.
+
+
